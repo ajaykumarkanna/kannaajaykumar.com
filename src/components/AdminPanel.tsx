@@ -68,6 +68,9 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
     setIsSaving(false);
     
     if (result.success) {
+      // Dispatch custom event to trigger refresh in usePortfolioData hook
+      window.dispatchEvent(new CustomEvent('portfolio-data-update'));
+      
       setSaved(true);
       setUnsavedChanges(false);
       setTimeout(() => setSaved(false), 3000);

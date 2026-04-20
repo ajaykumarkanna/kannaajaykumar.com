@@ -18,7 +18,7 @@ export default function EditingGuide() {
   // UPDATE THIS WITH YOUR GITHUB USERNAME
   const githubUsername = 'ajaykumarkanna'; // <-- Replace with your actual GitHub username
   const githubRepoURL = `https://github.com/${githubUsername}/kannaajaykumar.com`;
-  const directFileURL = `https://github.com/${githubUsername}/kannaajaykumar.com/edit/main/portfolio-content.json`;
+  const directFileURL = `https://github.com/${githubUsername}/kannaajaykumar.com/edit/main/public/portfolio-content.json`;
 
   return (
     <div className="space-y-6">

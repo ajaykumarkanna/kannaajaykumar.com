@@ -1,13 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { portfolioData as defaultData, type PortfolioData } from '../data/portfolio-data';
-import portfolioContent from '../data/portfolio-content.json';
 import { resolveAsset } from '../utils/assetUtils';
 
 /**
  * Hydrates portfolio data by resolving string asset keys to actual paths
  */
 function hydratePortfolioData(data: any): PortfolioData {
-  if (!data) return defaultData;
+  if (!data || Object.keys(data).length === 0) return defaultData;
 
   const hydrated = { ...data };
 
@@ -46,48 +45,51 @@ function hydratePortfolioData(data: any): PortfolioData {
 
 /**
  * Custom hook to manage portfolio data
- * Syncs with localStorage and local filesystem (via server) to persist admin panel changes
+ * Fetches from /portfolio-content.json (public folder) as the primary source
  */
 export function usePortfolioData() {
-  const [rawData, setRawData] = useState<any>(() => {
-    // 1. Try to use portfolio content from file
-    if (portfolioContent && Object.keys(portfolioContent).length > 0) {
-      return portfolioContent;
-    }
-    // 2. Fallback to default data
-    return defaultData;
-  });
+  const [rawData, setRawData] = useState<any>(defaultData);
 
   useEffect(() => {
-    const loadData = () => {
+    const loadData = async () => {
+      // 1. Try localStorage first (for unsaved session changes)
       const stored = localStorage.getItem('portfolioData_v4');
-      
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
           setRawData(parsed);
+          return;
         } catch (error) {
-          console.error('Error loading portfolio data from localStorage:', error);
+          console.error('Error loading from localStorage:', error);
           localStorage.removeItem('portfolioData_v4');
-          setRawData(portfolioContent && Object.keys(portfolioContent).length > 0 ? portfolioContent : defaultData);
         }
-      } else if (portfolioContent && Object.keys(portfolioContent).length > 0) {
-         setRawData(portfolioContent);
-      } else {
+      }
+
+      // 2. Fetch from public/portfolio-content.json
+      try {
+        const response = await fetch(`/portfolio-content.json?t=${Date.now()}`);
+        if (response.ok) {
+          const content = await response.json();
+          if (content && Object.keys(content).length > 0) {
+            setRawData(content);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching portfolio-content.json:', error);
         setRawData(defaultData);
       }
     };
 
-    // Initial load
     loadData();
 
-    // Listen for changes
-    window.addEventListener('storage', loadData);
-    window.addEventListener('portfolio-data-update', loadData);
+    // Listen for custom update events (from admin panel saves)
+    const handleUpdate = () => loadData();
+    window.addEventListener('portfolio-data-update', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
 
     return () => {
-      window.removeEventListener('storage', loadData);
-      window.removeEventListener('portfolio-data-update', loadData);
+      window.removeEventListener('portfolio-data-update', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
     };
   }, []);
 
