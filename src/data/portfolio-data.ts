@@ -243,7 +243,7 @@ export const portfolioData: PortfolioData = {
     globalClients: "8",
     usabilityImprovement: "100%",
     clientSatisfaction: "100%",
-    yearsExperience: "5"
+    yearsExperience: "500"
   },
 
   about: {
