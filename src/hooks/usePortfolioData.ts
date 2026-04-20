@@ -52,26 +52,14 @@ export function usePortfolioData() {
 
   useEffect(() => {
     const loadData = async () => {
-      // 1. Try localStorage first (for unsaved session changes)
-      const stored = localStorage.getItem('portfolioData_v4');
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          setRawData(parsed);
-          return;
-        } catch (error) {
-          console.error('Error loading from localStorage:', error);
-          localStorage.removeItem('portfolioData_v4');
-        }
-      }
-
-      // 2. Fetch from public/portfolio-content.json
+      // Fetch from public/portfolio-content.json
       try {
         const response = await fetch(`/portfolio-content.json?t=${Date.now()}`);
         if (response.ok) {
           const content = await response.json();
           if (content && Object.keys(content).length > 0) {
             setRawData(content);
+            console.log('Portfolio data loaded from JSON');
           }
         }
       } catch (error) {
@@ -83,13 +71,14 @@ export function usePortfolioData() {
     loadData();
 
     // Listen for custom update events (from admin panel saves)
-    const handleUpdate = () => loadData();
+    const handleUpdate = () => {
+      console.log('Update event received, reloading data...');
+      loadData();
+    };
     window.addEventListener('portfolio-data-update', handleUpdate);
-    window.addEventListener('storage', handleUpdate);
 
     return () => {
       window.removeEventListener('portfolio-data-update', handleUpdate);
-      window.removeEventListener('storage', handleUpdate);
     };
   }, []);
 
