@@ -16,7 +16,7 @@ export default function EditingGuide() {
   };
 
   // UPDATE THIS WITH YOUR GITHUB USERNAME
-  const githubUsername = 'YOUR_GITHUB_USERNAME'; // <-- Replace with your actual GitHub username
+  const githubUsername = 'ajaykumarkanna'; // <-- Replace with your actual GitHub username
   const githubRepoURL = `https://github.com/${githubUsername}/kannaajaykumar.com`;
   const directFileURL = `https://github.com/${githubUsername}/kannaajaykumar.com/edit/main/portfolio-content.json`;
 

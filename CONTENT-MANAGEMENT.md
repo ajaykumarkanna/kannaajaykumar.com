@@ -8,7 +8,7 @@ This portfolio website uses a **static JSON file** for content management. This 
 
 ### Option 1: Direct GitHub Editing (Recommended)
 
-1. **Go to your repository**: https://github.com/YOUR_USERNAME/kannaajaykumar.com
+1. **Go to your repository**: https://github.com/ajaykumarkanna/kannaajaykumar.com
 2. **Click on**: `portfolio-content.json`
 3. **Click the pencil icon** (✏️) in the top-right
 4. **Make your changes** to the content

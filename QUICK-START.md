@@ -4,10 +4,10 @@
 
 ### 1. Update Your GitHub Username
 **File to edit**: `src/components/admin/EditingGuide.tsx`  
-**Line 18**: Change `'YOUR_GITHUB_USERNAME'` to your actual GitHub username
+**Line 18**: Already updated to `'ajaykumarkanna'` ✅
 
 ```typescript
-const githubUsername = 'kannaajaykumar'; // <-- Put your username here
+const githubUsername = 'ajaykumarkanna'; // Already set!
 ```
 
 ### 2. Commit Everything to GitHub
@@ -27,7 +27,7 @@ GitHub Pages will deploy in 1-2 minutes. Your site will be live at:
 
 ### Method 1: Direct GitHub Edit (Fastest) ⚡
 
-1. **Go to**: https://github.com/YOUR_USERNAME/kannaajaykumar.com
+1. **Go to**: https://github.com/ajaykumarkanna/kannaajaykumar.com
 2. **Click**: `portfolio-content.json`
 3. **Click**: Pencil icon (✏️) in top-right
 4. **Edit**: Make your changes
