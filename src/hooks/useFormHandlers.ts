@@ -6,7 +6,9 @@ import type {
   Skill, 
   Client, 
   Testimonial,
-  Hobby
+  Hobby,
+  WebsitesWithAjaySection,
+  WebsiteProject
 } from '../data/portfolio-data';
 import { 
   validateFormSection, 
@@ -17,111 +19,66 @@ import {
   validateTestimonial,
   ValidationErrors
 } from '../utils/validation';
-import savedData from '../data/saved-data.json';
 
 export function useFormHandlers(initialData: PortfolioData) {
-  const [data, setData] = useState<PortfolioData>(() => {
-    // 1. Try to load data from localStorage first
-    const savedLocal = localStorage.getItem('portfolioData_v4');
-    if (savedLocal) {
-      try {
-        const parsed = JSON.parse(savedLocal);
-        return parsed;
-      } catch (e) {
-        console.error('Failed to parse saved data from localStorage:', e);
-        localStorage.removeItem('portfolioData_v4');
-      }
-    }
-    
-    // 2. Try to load data from server file (saved-data.json)
-    if (Object.keys(savedData).length > 0) {
-      return savedData as unknown as PortfolioData;
-    }
-
-    // 3. Fallback to initialData
-    return initialData;
-  });
+  const [data, setData] = useState<PortfolioData>(initialData);
+  const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState<Record<string, ValidationErrors>>({});
 
-  // Save data to localStorage whenever it changes
+  // Load data from portfolio-content.json on mount
   useEffect(() => {
-    localStorage.setItem('portfolioData_v4', JSON.stringify(data));
-    // Dispatch a custom event to notify other components of data changes
-    const event = new CustomEvent('portfolio-data-update');
-    window.dispatchEvent(event);
-  }, [data]);
-
-  const handleSave = async () => {
-    // Data is already saved to localStorage via useEffect
-    console.log('Portfolio data saved to localStorage:', data);
-
-    // Attempt to save to local server
-    try {
-      const response = await fetch('http://localhost:3001/api/save', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log('Portfolio data saved to server!');
-        // alert('Data saved to server successfully!'); // Optional: notify user
-      } else {
-        console.warn('Failed to save to server:', response.statusText);
+    const loadContent = async () => {
+      try {
+        // Add timestamp to prevent caching
+        const response = await fetch(`/portfolio-content.json?t=${Date.now()}`);
+        if (response.ok) {
+          const contentData = await response.json();
+          setData(contentData);
+        }
+      } catch (error) {
+        console.warn('Could not load portfolio-content.json, using default data:', error);
+        // Fallback to default data from portfolio-data.ts
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.warn('Server unreachable. Data saved to localStorage only.', error);
-    }
+    };
+
+    loadContent();
+  }, []);
+
+  // Save handler - now shows instructions instead of saving
+  const handleSave = () => {
+    alert('To save changes permanently:\n\n1. Export the JSON file\n2. Go to GitHub.com\n3. Edit portfolio-content.json\n4. Paste your changes\n5. Commit the changes\n\nCheck the Admin tab for detailed instructions!');
   };
 
+  // Export JSON
   const handleExportJSON = () => {
     const dataStr = JSON.stringify(data, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    const exportFileDefaultName = 'portfolio-data.json';
+    
+    const exportFileDefaultName = 'portfolio-content.json';
+    
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
     linkElement.setAttribute('download', exportFileDefaultName);
     linkElement.click();
   };
 
+  // Import JSON
   const handleImportJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        try {
-          const imported = JSON.parse(e.target?.result as string);
-          setData(imported);
-          alert('Portfolio data imported successfully!');
-        } catch (error) {
-          console.error('Error importing data:', error);
-          alert('Error importing data: Invalid JSON format.');
-        }
-      };
-      reader.readAsText(file);
-    }
-    // Reset the input value to allow selecting the same file again
-    event.target.value = '';
-  };
+    if (!file) return;
 
-  // Validation helpers
-  const validateAndSetErrors = (section: string, validator: () => ValidationErrors) => {
-    const sectionErrors = validator();
-    setErrors(prev => ({
-      ...prev,
-      [section]: sectionErrors
-    }));
-    return Object.keys(sectionErrors).length === 0;
-  };
-
-  const clearSectionErrors = (section: string) => {
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[section];
-      return newErrors;
-    });
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target?.result as string);
+        setData(importedData);
+      } catch (error) {
+        alert('Failed to import JSON file. Please check the file format.');
+      }
+    };
+    reader.readAsText(file);
   };
 
   // Project handlers
@@ -130,52 +87,29 @@ export function useFormHandlers(initialData: PortfolioData) {
       id: Date.now(),
       featured: false,
       title: "New Project",
-      company: "Company Name",
-      duration: "Jan 2025 – Present",
-      role: "Designer",
-      summary: "Project description here",
-      impact: "Impact statement",
+      company: "Company",
+      duration: "Duration",
+      role: "Role",
+      summary: "Project summary...",
+      impact: "Impact...",
       deliverables: ["Deliverable 1"],
-      tags: ["Tag1"],
+      tags: ["Tag 1"],
       image: "",
       category: "Category",
-      problemStatement: "Problem statement"
+      problemStatement: "Problem statement..."
     };
     setData({ ...data, projects: [...data.projects, newProject] });
   };
 
   const deleteProject = (id: number) => {
     setData({ ...data, projects: data.projects.filter(p => p.id !== id) });
-    // Clear errors for this project if they exist
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[`project-${id}`];
-      return newErrors;
-    });
   };
 
   const updateProject = (id: number, updates: Partial<Project>) => {
-    const updatedProjects = data.projects.map(p => p.id === id ? { ...p, ...updates } : p);
-    setData({ ...data, projects: updatedProjects });
-    
-    // Validate the updated project
-    const project = updatedProjects.find(p => p.id === id);
-    if (project) {
-      const projectErrors = validateProject(project);
-      if (Object.keys(projectErrors).length > 0) {
-        setErrors(prev => ({
-          ...prev,
-          [`project-${id}`]: projectErrors
-        }));
-      } else {
-        // Clear errors if validation passes
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[`project-${id}`];
-          return newErrors;
-        });
-      }
-    }
+    setData({
+      ...data,
+      projects: data.projects.map(p => p.id === id ? { ...p, ...updates } : p)
+    });
   };
 
   // Experience handlers
@@ -183,90 +117,44 @@ export function useFormHandlers(initialData: PortfolioData) {
     const newExp: Experience = {
       id: Date.now(),
       title: "Job Title",
-      company: "Company Name",
-      duration: "Jan 2025 – Present",
-      current: true,
-      highlights: ["Achievement 1", "Achievement 2"]
+      company: "Company",
+      duration: "Duration",
+      current: false,
+      highlights: ["Highlight 1"]
     };
     setData({ ...data, experience: [...data.experience, newExp] });
   };
 
   const deleteExperience = (id: number) => {
     setData({ ...data, experience: data.experience.filter(e => e.id !== id) });
-    // Clear errors for this experience if they exist
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[`experience-${id}`];
-      return newErrors;
-    });
   };
 
   const updateExperience = (id: number, updates: Partial<Experience>) => {
-    const updatedExperience = data.experience.map(e => e.id === id ? { ...e, ...updates } : e);
-    setData({ ...data, experience: updatedExperience });
-    
-    // Validate the updated experience
-    const experience = updatedExperience.find(e => e.id === id);
-    if (experience) {
-      const expErrors = validateExperience(experience);
-      if (Object.keys(expErrors).length > 0) {
-        setErrors(prev => ({
-          ...prev,
-          [`experience-${id}`]: expErrors
-        }));
-      } else {
-        // Clear errors if validation passes
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[`experience-${id}`];
-          return newErrors;
-        });
-      }
-    }
+    setData({
+      ...data,
+      experience: data.experience.map(e => e.id === id ? { ...e, ...updates } : e)
+    });
   };
 
   // Skill handlers
   const addSkill = () => {
     const newSkill: Skill = {
       category: "New Category",
-      icon: "Code", // Default icon for skills
-      items: ["Skill 1", "Skill 2"]
+      icon: "Code",
+      items: ["Skill 1"]
     };
     setData({ ...data, skills: [...data.skills, newSkill] });
   };
 
   const deleteSkill = (index: number) => {
     setData({ ...data, skills: data.skills.filter((_, i) => i !== index) });
-    // Clear errors for this skill if they exist
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[`skill-${index}`];
-      return newErrors;
-    });
   };
 
   const updateSkill = (index: number, updates: Partial<Skill>) => {
-    const updatedSkills = data.skills.map((skill, i) => i === index ? { ...skill, ...updates } : skill);
-    setData({ ...data, skills: updatedSkills });
-    
-    // Validate the updated skill
-    const skill = updatedSkills[index];
-    if (skill) {
-      const skillErrors = validateSkill(skill);
-      if (Object.keys(skillErrors).length > 0) {
-        setErrors(prev => ({
-          ...prev,
-          [`skill-${index}`]: skillErrors
-        }));
-      } else {
-        // Clear errors if validation passes
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[`skill-${index}`];
-          return newErrors;
-        });
-      }
-    }
+    setData({
+      ...data,
+      skills: data.skills.map((s, i) => i === index ? { ...s, ...updates } : s)
+    });
   };
 
   // Client handlers
@@ -280,89 +168,43 @@ export function useFormHandlers(initialData: PortfolioData) {
 
   const deleteClient = (index: number) => {
     setData({ ...data, clients: data.clients.filter((_, i) => i !== index) });
-    // Clear errors for this client if they exist
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[`client-${index}`];
-      return newErrors;
-    });
   };
 
   const updateClient = (index: number, updates: Partial<Client>) => {
-    const updatedClients = data.clients.map((client, i) => i === index ? { ...client, ...updates } : client);
-    setData({ ...data, clients: updatedClients });
-    
-    // Validate the updated client
-    const client = updatedClients[index];
-    if (client) {
-      const clientErrors = validateClient(client);
-      if (Object.keys(clientErrors).length > 0) {
-        setErrors(prev => ({
-          ...prev,
-          [`client-${index}`]: clientErrors
-        }));
-      } else {
-        // Clear errors if validation passes
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[`client-${index}`];
-          return newErrors;
-        });
-      }
-    }
+    setData({
+      ...data,
+      clients: data.clients.map((c, i) => i === index ? { ...c, ...updates } : c)
+    });
   };
 
   // Testimonial handlers
   const addTestimonial = () => {
     const newTestimonial: Testimonial = {
-      quote: "Add testimonial quote here...",
+      quote: "Testimonial quote...",
       author: "Author Name",
-      role: "Job Title",
-      company: "Company Name"
+      role: "Role",
+      company: "Company"
     };
     setData({ ...data, testimonials: [...data.testimonials, newTestimonial] });
   };
 
   const deleteTestimonial = (index: number) => {
     setData({ ...data, testimonials: data.testimonials.filter((_, i) => i !== index) });
-    // Clear errors for this testimonial if they exist
-    setErrors(prev => {
-      const newErrors = { ...prev };
-      delete newErrors[`testimonial-${index}`];
-      return newErrors;
-    });
   };
 
   const updateTestimonial = (index: number, updates: Partial<Testimonial>) => {
-    const updatedTestimonials = data.testimonials.map((testimonial, i) => i === index ? { ...testimonial, ...updates } : testimonial);
-    setData({ ...data, testimonials: updatedTestimonials });
-    
-    // Validate the updated testimonial
-    const testimonial = updatedTestimonials[index];
-    if (testimonial) {
-      const testimonialErrors = validateTestimonial(testimonial);
-      if (Object.keys(testimonialErrors).length > 0) {
-        setErrors(prev => ({
-          ...prev,
-          [`testimonial-${index}`]: testimonialErrors
-        }));
-      } else {
-        // Clear errors if validation passes
-        setErrors(prev => {
-          const newErrors = { ...prev };
-          delete newErrors[`testimonial-${index}`];
-          return newErrors;
-        });
-      }
-    }
+    setData({
+      ...data,
+      testimonials: data.testimonials.map((t, i) => i === index ? { ...t, ...updates } : t)
+    });
   };
 
   // Hobby handlers
   const addHobby = () => {
     const newHobby: Hobby = {
-      icon: "Sparkles", // Default icon
+      icon: "Sparkles",
       title: "New Hobby",
-      description: "Description of new hobby"
+      description: "Description..."
     };
     setData({ ...data, hobbies: [...data.hobbies, newHobby] });
   };
@@ -372,21 +214,64 @@ export function useFormHandlers(initialData: PortfolioData) {
   };
 
   const updateHobby = (index: number, updates: Partial<Hobby>) => {
-    const updatedHobbies = data.hobbies.map((hobby, i) => i === index ? { ...hobby, ...updates } : hobby);
-    setData({ ...data, hobbies: updatedHobbies });
+    setData({
+      ...data,
+      hobbies: data.hobbies.map((h, i) => i === index ? { ...h, ...updates } : h)
+    });
   };
 
-  // File upload handler
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, callback: (url: string) => void) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        callback(result);
-      };
-      reader.readAsDataURL(file);
-    }
+  // Website Section Handlers
+  const updateWebsitesWithAjay = (updates: Partial<WebsitesWithAjaySection>) => {
+    setData({ ...data, websitesWithAjay: { ...data.websitesWithAjay, ...updates } });
+  };
+  
+  const addWebsiteSuccessStory = () => {
+    const newStory: WebsiteProject = {
+      id: Date.now(),
+      title: "New Success Story",
+      description: "Description...",
+      before: "Before state...",
+      after: "After state...",
+      result: "Result...",
+      metrics: "+100% Growth",
+      image: ""
+    };
+    setData({
+      ...data,
+      websitesWithAjay: {
+        ...data.websitesWithAjay,
+        successStories: [...data.websitesWithAjay.successStories, newStory]
+      }
+    });
+  };
+
+  const updateWebsiteSuccessStory = (id: number, updates: Partial<WebsiteProject>) => {
+    const updatedStories = data.websitesWithAjay.successStories.map(s => 
+      s.id === id ? { ...s, ...updates } : s
+    );
+    setData({
+      ...data,
+      websitesWithAjay: {
+        ...data.websitesWithAjay,
+        successStories: updatedStories
+      }
+    });
+  };
+
+  const deleteWebsiteSuccessStory = (id: number) => {
+    setData({
+      ...data,
+      websitesWithAjay: {
+        ...data.websitesWithAjay,
+        successStories: data.websitesWithAjay.successStories.filter(s => s.id !== id)
+      }
+    });
+  };
+
+  // File upload handler (placeholder for future implementation)
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Future implementation for file uploads
+    console.log('File upload not yet implemented');
   };
 
   return {
@@ -420,7 +305,14 @@ export function useFormHandlers(initialData: PortfolioData) {
     addHobby,
     deleteHobby,
     updateHobby,
+    // Website Section Handlers
+    updateWebsitesWithAjay,
+    addWebsiteSuccessStory,
+    updateWebsiteSuccessStory,
+    deleteWebsiteSuccessStory,
     // File upload handler
-    handleFileUpload
+    handleFileUpload,
+    // Loading state
+    isLoading
   };
 }

@@ -99,3 +99,6 @@ build
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Old saved data (no longer used - now using portfolio-content.json)
+src/data/saved-data.json

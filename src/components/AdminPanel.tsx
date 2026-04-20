@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Save, Plus, Trash2, Upload, Download, Eye, Settings, User, Briefcase, GraduationCap, Code, Users, MessageSquare, Building2, ArrowLeft, Edit2, Check, X, Image as ImageIcon,
-  AlertCircle, CheckCircle, Info, Gamepad2
+  AlertCircle, CheckCircle, Info, Gamepad2, Monitor
 } from 'lucide-react';import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -15,7 +15,8 @@ import { useFormHandlers } from '../hooks/useFormHandlers';
 import { FormInput } from './forms/FormInput';
 import { FormTextarea } from './forms/FormTextarea';
 import { AssetSelector } from './forms/AssetSelector';
-// import { MainNavigation } from './MainNavigation';  // Removed as per request
+import { WebsitesWithAjayAdmin } from './admin/WebsitesWithAjayAdmin';
+import EditingGuide from './admin/EditingGuide';
 
 interface AdminPanelProps {
   onClose: () => void;
@@ -48,18 +49,22 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
     addHobby,
     deleteHobby,
     updateHobby,
+    updateWebsitesWithAjay,
+    addWebsiteSuccessStory,
+    updateWebsiteSuccessStory,
+    deleteWebsiteSuccessStory,
     handleFileUpload
   } = useFormHandlers(portfolioData);
   
-  const [activeTab, setActiveTab] = useState('contact');
+  const [activeTab, setActiveTab] = useState('guide'); // Default to guide tab for first-time users
   const [saved, setSaved] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
   const handleSaveWithFeedback = () => {
-    handleSave();
+    handleExportJSON(); // Export the JSON file
     setSaved(true);
     setUnsavedChanges(false);
-    setTimeout(() => setSaved(false), 2000);
+    setTimeout(() => setSaved(false), 3000);
   };
 
   // Track unsaved changes
@@ -142,17 +147,17 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
               <Button 
                 onClick={handleSaveWithFeedback}
                 className="bg-indigo-600 hover:bg-indigo-700"
-                disabled={!unsavedChanges}
+                title="Export JSON file to upload to GitHub"
               >
                 {saved ? (
                   <>
                     <CheckCircle className="w-4 h-4 mr-2" />
-                    Saved!
+                    Exported!
                   </>
                 ) : (
                   <>
-                    <Save className="w-4 h-4 mr-2" />
-                    Save Changes
+                    <Download className="w-4 h-4 mr-2" />
+                    Export JSON
                   </>
                 )}
               </Button>
@@ -167,7 +172,7 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              You have unsaved changes. Don't forget to save before leaving!
+              You have unsaved changes. Click "Export JSON" to download your changes, then upload to GitHub!
             </AlertDescription>
           </Alert>
         </div>
@@ -175,7 +180,7 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 mb-8 sticky top-[68px] z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 mb-8 sticky top-[68px] z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
             <TabsTrigger value="contact" className="flex items-center gap-2">
               <User className="w-4 h-4" />
               <span className="hidden sm:inline">Contact</span>
@@ -211,6 +216,14 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
             <TabsTrigger value="hobbies" className="flex items-center gap-2">
               <Gamepad2 className="w-4 h-4" />
               <span className="hidden sm:inline">Hobbies</span>
+            </TabsTrigger>
+            <TabsTrigger value="websites" className="flex items-center gap-2">
+              <Monitor className="w-4 h-4" />
+              <span className="hidden sm:inline">Websites</span>
+            </TabsTrigger>
+            <TabsTrigger value="guide" className="flex items-center gap-2 bg-green-100">
+              <Settings className="w-4 h-4" />
+              <span className="hidden sm:inline">📖 How to Edit</span>
             </TabsTrigger>
           </TabsList>
 
@@ -830,6 +843,22 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
                 </Card>
               ))}
             </div>
+          </TabsContent>
+
+          {/* Websites With Ajay Tab */}
+          <TabsContent value="websites">
+             <WebsitesWithAjayAdmin 
+               data={data.websitesWithAjay}
+               onUpdate={updateWebsitesWithAjay}
+               onAddStory={addWebsiteSuccessStory}
+               onUpdateStory={updateWebsiteSuccessStory}
+               onDeleteStory={deleteWebsiteSuccessStory}
+             />
+          </TabsContent>
+
+          {/* How to Edit Guide Tab */}
+          <TabsContent value="guide">
+            <EditingGuide />
           </TabsContent>
         </Tabs>
       </div>

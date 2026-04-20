@@ -141,6 +141,28 @@ export interface Testimonial {
   image?: string;
 }
 
+export interface WebsiteProject {
+  id: number;
+  title: string;
+  description: string;
+  before: string;
+  after: string;
+  result: string;
+  metrics: string;
+  image?: string;
+}
+
+export interface VideoContent {
+  title: string;
+  videoUrl: string;
+  thumbnail?: string;
+}
+
+export interface WebsitesWithAjaySection {
+  welcomeVideo: VideoContent;
+  successStories: WebsiteProject[];
+}
+
 export interface ContactInfo {
   name: string;
   title: string;
@@ -178,10 +200,30 @@ export interface PortfolioData {
   hobbies: Hobby[];
   clients: Client[];
   testimonials: Testimonial[];
+  websitesWithAjay: WebsitesWithAjaySection;
 }
 
 // Default Portfolio Data
 export const portfolioData: PortfolioData = {
+  websitesWithAjay: {
+    welcomeVideo: {
+      title: "How a Website Transforms Your Local Business",
+      videoUrl: "",
+      thumbnail: ""
+    },
+    successStories: [
+      {
+        id: 1,
+        title: "The Green Leaf Cafe",
+        description: "They had amazing coffee but no online menu or way to find them.",
+        before: "Relied only on foot traffic. Slow weekdays.",
+        after: "A mobile-friendly site with an online menu and table reservation system.",
+        result: "30% increase in weekly orders and fully booked weekends within 2 months.",
+        metrics: "+340% Monthly Visitors",
+        image: "" 
+      }
+    ]
+  },
   contact: {
     name: "Kanna Ajay Kumar",
     title: "UI/UX Designer & Consultant",

@@ -8,6 +8,8 @@ import PreviewPage from './components/PreviewPage';
 import { useEffect } from 'react';
 import { getAssetReferences } from './data/portfolio-data';
 
+import WebsitesWithAjay from './components/WebsitesWithAjay';
+
 function AppContent() {
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ function AppContent() {
     <Routes>
       <Route path="/" element={<Resume onNavigateToPortfolio={() => navigate('/portfolio')} />} />
       <Route path="/portfolio" element={<Portfolio onNavigateToResume={() => navigate('/')} />} />
+      <Route path="/websiteswithajay" element={<WebsitesWithAjay />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route
         path="/admin"

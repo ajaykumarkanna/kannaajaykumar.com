@@ -101,6 +101,12 @@ export default function Portfolio({ onNavigateToResume }: PortfolioProps) {
         
         <PortfolioCTA onNavigateToResume={onNavigateToResume} />
         
+        <div className="mt-8 text-center">
+            <Link to="/websiteswithajay" className="text-sm text-slate-400 hover:text-indigo-600 transition-colors">
+              Looking for a website for your local business? Click here.
+            </Link>
+        </div>
+
         {/* Footer */}
         <div className="mt-12 text-center text-sm text-slate-500">
           <p>© {new Date().getFullYear()} kannaajaykumar.com</p>
