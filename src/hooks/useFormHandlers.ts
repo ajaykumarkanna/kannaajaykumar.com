@@ -51,6 +51,29 @@ export function useFormHandlers(initialData: PortfolioData) {
     alert('To save changes permanently:\n\n1. Export the JSON file\n2. Go to GitHub.com\n3. Edit portfolio-content.json\n4. Paste your changes\n5. Commit the changes\n\nCheck the Admin tab for detailed instructions!');
   };
 
+  // Save to Server
+  const saveToServer = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/save', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        return { success: true, message: 'Data saved successfully to server!' };
+      } else {
+        const errData = await response.json();
+        return { success: false, message: errData.message || 'Failed to save to server.' };
+      }
+    } catch (error) {
+      console.error('Error saving to server:', error);
+      return { success: false, message: 'Could not connect to backend server. Make sure "npm run server" is running.' };
+    }
+  };
+
   // Export JSON
   const handleExportJSON = () => {
     const dataStr = JSON.stringify(data, null, 2);
@@ -279,6 +302,7 @@ export function useFormHandlers(initialData: PortfolioData) {
     setData,
     errors,
     handleSave,
+    saveToServer,
     handleExportJSON,
     handleImportJSON,
     // Project handlers

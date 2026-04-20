@@ -53,18 +53,27 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
     addWebsiteSuccessStory,
     updateWebsiteSuccessStory,
     deleteWebsiteSuccessStory,
+    saveToServer,
     handleFileUpload
   } = useFormHandlers(portfolioData);
   
   const [activeTab, setActiveTab] = useState('guide'); // Default to guide tab for first-time users
   const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [unsavedChanges, setUnsavedChanges] = useState(false);
 
-  const handleSaveWithFeedback = () => {
-    handleExportJSON(); // Export the JSON file
-    setSaved(true);
-    setUnsavedChanges(false);
-    setTimeout(() => setSaved(false), 3000);
+  const handleSaveWithFeedback = async () => {
+    setIsSaving(true);
+    const result = await saveToServer();
+    setIsSaving(false);
+    
+    if (result.success) {
+      setSaved(true);
+      setUnsavedChanges(false);
+      setTimeout(() => setSaved(false), 3000);
+    } else {
+      alert(result.message);
+    }
   };
 
   // Track unsaved changes
@@ -146,18 +155,18 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
               </Button>
               <Button 
                 onClick={handleSaveWithFeedback}
-                className="bg-indigo-600 hover:bg-indigo-700"
-                title="Export JSON file to upload to GitHub"
+                className="bg-green-600 hover:bg-green-700"
+                disabled={isSaving}
               >
                 {saved ? (
                   <>
                     <CheckCircle className="w-4 h-4 mr-2" />
-                    Exported!
+                    Saved!
                   </>
                 ) : (
                   <>
-                    <Download className="w-4 h-4 mr-2" />
-                    Export JSON
+                    <Save className="w-4 h-4 mr-2" />
+                    {isSaving ? 'Saving...' : 'Save Changes'}
                   </>
                 )}
               </Button>
@@ -172,7 +181,7 @@ export default function AdminPanel({ onClose, onPreview }: AdminPanelProps) {
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              You have unsaved changes. Click "Export JSON" to download your changes, then upload to GitHub!
+              You have unsaved changes. Click "Save Changes" to persist them to your local file!
             </AlertDescription>
           </Alert>
         </div>

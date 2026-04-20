@@ -99,7 +99,62 @@ const assetMap: Record<string, string> = {
   
   // Other assets
   'Resume PDF': ResumePDF,
-  'Favicon': FaviconAsset
+  'Favicon': FaviconAsset,
+  
+  // Direct mapping for JSON keys with underscores
+  'Profile_Image': Profile_Image,
+  'Thumbnail_CBA': Thumbnail_CBA,
+  'Thumbnail_ADCircular': Thumbnail_ADCircular,
+  'Thumbnail_Flexcellence': Thumbnail_Flexcellence,
+  'Thumbnail_AIGovernance': Thumbnail_AIGovernance,
+  'Thumbnail_ADAM': Thumbnail_ADAM,
+  'Thumbnail_JohnCoffeeBeans': Thumbnail_JohnCoffeeBeans,
+  'Thumbnail_VR': Thumbnail_VR,
+  
+  'Logo_Verizon': Logo_Verizon,
+  'Logo_CBA': Logo_CBA,
+  'Logo_Avery': Logo_Avery,
+  'Logo_TCS': Logo_TCS,
+  'Logo_Brillio': Logo_Brillio,
+  'Logo_Flexcellence': Logo_Flexcellence,
+  'Logo_Stellantis': Logo_Stellantis,
+  'Logo_Aurum': Logo_Aurum,
+  'Logo_ADCircular': Logo_ADCircular,
+  'Logo_AdobeXD': Logo_AdobeXD,
+  'Logo_Dropout': Logo_Dropout,
+  'Logo_Figma': Logo_Figma,
+  'Logo_Maze': Logo_Maze,
+  'Logo_Outsystems': Logo_Outsystems,
+  'Logo_Pega': Logo_Pega,
+  'Logo_Sketch': Logo_Sketch,
+  
+  'Ajay_Kumar_Resume_Oct25': ResumePDF
+};
+
+// Robust function to resolve an asset by various possible keys
+export const resolveAsset = (key: string | undefined): string => {
+  if (!key) return '';
+  
+  // 1. Direct match
+  if (assetMap[key]) return assetMap[key];
+  
+  // 2. Try replacing underscores with spaces
+  const spaceKey = key.replace(/_/g, ' ');
+  if (assetMap[spaceKey]) return assetMap[spaceKey];
+  
+  // 3. Try replacing spaces with underscores
+  const underscoreKey = key.replace(/ /g, '_');
+  if (assetMap[underscoreKey]) return assetMap[underscoreKey];
+  
+  // 4. Try case-insensitive match
+  const lowerKey = key.toLowerCase();
+  const found = Object.entries(assetMap).find(([k]) => k.toLowerCase() === lowerKey);
+  if (found) return found[1];
+
+  // 5. If it already looks like a path or URL, return it
+  if (key.includes('/') || key.startsWith('http') || key.startsWith('data:')) return key;
+
+  return ''; // No asset found
 };
 
 // Get all available assets dynamically
