@@ -141,10 +141,22 @@
   "experience": [
     {
       "id": 1,
+      "title": "Senior UX Designer",
+      "company": "Amnet Digital",
+      "duration": "Jan 2026 – Present",
+      "current": true,
+      "highlights": [
+        "Sole UX Designer for 3 enterprise solutions at Iron Mountain, owning research, flows, and UI delivery across complex business systems", 
+        "Collaborating with stakeholders to align business goals with future-ready UX strategies",
+        "Establishing consistency via Design System (DSM) standardization across products"
+      ]
+    },
+    {
+      "id": 2,
       "title": "UI/UX Consultant",
       "company": "Brillio",
-      "duration": "Jun 2025 – Present",
-      "current": true,
+      "duration": "Jun 2025 – Nov 2025",
+      "current": false,
       "highlights": [
         "Redesigned Verizon's iPad ordering app with AI integration",
         "Led user research and AI-driven prototyping",
@@ -152,7 +164,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "title": "UI/UX Designer",
       "company": "Tata Consultancy Services",
       "duration": "Nov 2020 – Jun 2025",
