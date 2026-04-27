@@ -109,7 +109,7 @@
       "duration": "9+ months",
       "role": "Product Designer",
       "summary": "Designed a mobile-first wellness app that helps working professionals improve their lifestyle through personalized coaching, AI-driven assistance, and integrated health tracking. The app unifies food journaling, workout tracking, hydration, sleep, and habit building into one cohesive platform while providing real-time human and AI support",
-      "impact": "60% goal completion rate among pilot users, 50% increase in new users during MVP testing, AI assistant “TARA” used by 80% of users for food logging, ",
+      "impact": "60% goal completion rate among pilot users, 50% increase in new users during MVP testing, AI assistant “TARA” used by 80% of users for food logging,",
       "deliverables": [
         "User Research",
         "Surveys",
@@ -283,7 +283,7 @@
         "Partnered with stakeholders to deliver scalable UX solutions"
       ]
     },
-     {
+    {
       "id": 2,
       "title": "UI/UX Consultant",
       "company": "Brillio",
@@ -404,6 +404,10 @@
     }
   ],
   "clients": [
+    {
+      "name": "Iron mountain",
+      "logo": "/images/pasted-image-1777301747401.png"
+    },
     {
       "name": "Verizon",
       "logo": "/images/logos/Logo_Verizon.png"
