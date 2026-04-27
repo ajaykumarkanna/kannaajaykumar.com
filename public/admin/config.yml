@@ -1,0 +1,149 @@
+backend:
+  name: github
+  repo: ajaykumarkanna/kannaajaykumar.com
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "portfolio"
+    label: "Portfolio Data"
+    files:
+      - file: "public/portfolio-content.json"
+        label: "Portfolio Content"
+        name: "data"
+        fields:
+          - name: websitesWithAjay
+            label: "Websites With Ajay"
+            widget: object
+            fields:
+              - name: welcomeVideo
+                label: "Welcome Video"
+                widget: object
+                fields:
+                  - {name: title, label: Title, widget: string}
+                  - {name: videoUrl, label: Video URL, widget: string, required: false}
+                  - {name: thumbnail, label: Thumbnail, widget: image, required: false}
+              - name: successStories
+                label: "Success Stories"
+                widget: list
+                fields:
+                  - {name: id, label: ID, widget: number}
+                  - {name: title, label: Title, widget: string}
+                  - {name: description, label: Description, widget: text}
+                  - {name: before, label: Before, widget: text}
+                  - {name: after, label: After, widget: text}
+                  - {name: result, label: Result, widget: text}
+                  - {name: metrics, label: Metrics, widget: string}
+                  - {name: image, label: Image, widget: image, required: false}
+          - name: contact
+            label: "Contact Info"
+            widget: object
+            fields:
+              - {name: name, label: Name, widget: string}
+              - {name: title, label: Title, widget: string}
+              - {name: tagline, label: Tagline, widget: text}
+              - {name: location, label: Location, widget: string}
+              - {name: phone, label: Phone, widget: string}
+              - {name: email, label: Email, widget: string}
+              - {name: portfolio, label: Portfolio URL, widget: string}
+              - {name: linkedin, label: LinkedIn URL, widget: string}
+              - {name: whatsapp, label: WhatsApp URL, widget: string}
+              - {name: profileImage, label: Profile Image, widget: image}
+              - {name: resumePDF, label: Resume PDF, widget: file}
+          - name: stats
+            label: "Stats"
+            widget: object
+            fields:
+              - {name: projectsDelivered, label: Projects Delivered, widget: string}
+              - {name: globalClients, label: Global Clients, widget: string}
+              - {name: usabilityImprovement, label: Usability Improvement, widget: string}
+              - {name: clientSatisfaction, label: Client Satisfaction, widget: string}
+              - {name: yearsExperience, label: Years Experience, widget: string}
+          - name: about
+            label: "About Me"
+            widget: object
+            fields:
+              - {name: background, label: Background, widget: text}
+              - {name: specialization, label: Specialization, widget: text}
+              - {name: approach, label: Approach, widget: text}
+          - name: projects
+            label: "Projects"
+            widget: list
+            fields:
+              - {name: id, label: ID, widget: number}
+              - {name: featured, label: Featured, widget: boolean}
+              - {name: title, label: Title, widget: string}
+              - {name: company, label: Company, widget: string}
+              - {name: duration, label: Duration, widget: string}
+              - {name: role, label: Role, widget: string}
+              - {name: summary, label: Summary, widget: text}
+              - {name: impact, label: Impact, widget: text}
+              - {name: deliverables, label: Deliverables, widget: list, field: {name: deliverable, label: Deliverable, widget: string}}
+              - {name: tags, label: Tags, widget: list, field: {name: tag, label: Tag, widget: string}}
+              - {name: image, label: Thumbnail, widget: image}
+              - {name: category, label: Category, widget: string}
+              - {name: problemStatement, label: Problem Statement, widget: text}
+              - {name: externalLink, label: External Link, widget: string, required: false}
+          - name: experience
+            label: "Experience"
+            widget: list
+            fields:
+              - {name: id, label: ID, widget: number}
+              - {name: title, label: Job Title, widget: string}
+              - {name: company, label: Company, widget: string}
+              - {name: duration, label: Duration, widget: string}
+              - {name: current, label: Is Current Role, widget: boolean}
+              - {name: highlights, label: Highlights, widget: list, field: {name: highlight, label: Highlight, widget: string}}
+          - name: education
+            label: "Education"
+            widget: object
+            fields:
+              - {name: degree, label: Degree, widget: string}
+              - {name: institution, label: Institution, widget: string}
+              - {name: location, label: Location, widget: string}
+              - {name: duration, label: Duration, widget: string}
+              - {name: cgpa, label: CGPA, widget: string}
+              - {name: focus, label: Focus, widget: string}
+          - name: certifications
+            label: "Certifications"
+            widget: list
+            fields:
+              - {name: title, label: Title, widget: string}
+              - {name: date, label: Date, widget: string}
+          - name: activities
+            label: "Activities"
+            widget: list
+            fields:
+              - {name: title, label: Title, widget: string}
+              - {name: date, label: Date, widget: string}
+          - name: skills
+            label: "Skills"
+            widget: list
+            fields:
+              - {name: icon, label: Icon Name (Lucide), widget: string}
+              - {name: category, label: Category, widget: string}
+              - {name: items, label: Skills, widget: list, field: {name: item, label: Skill, widget: text}}
+          - name: hobbies
+            label: "Hobbies"
+            widget: list
+            fields:
+              - {name: icon, label: Icon Name (Lucide), widget: string}
+              - {name: title, label: Title, widget: string}
+              - {name: description, label: Description, widget: text}
+          - name: clients
+            label: "Clients"
+            widget: list
+            fields:
+              - {name: name, label: Name, widget: string}
+              - {name: logo, label: Logo, widget: image}
+          - name: testimonials
+            label: "Testimonials"
+            widget: list
+            fields:
+              - {name: quote, label: Quote, widget: text}
+              - {name: author, label: Author, widget: string}
+              - {name: image, label: Image, widget: image, required: false}
+              - {name: role, label: Role, widget: string}
+              - {name: company, label: Company, widget: string}
