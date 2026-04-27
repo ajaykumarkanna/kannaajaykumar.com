@@ -33,10 +33,10 @@
   },
   "stats": {
     "projectsDelivered": "30+",
-    "globalClients": "80",
+    "globalClients": "9",
     "usabilityImprovement": "100%",
     "clientSatisfaction": "100%",
-    "yearsExperience": "5"
+    "yearsExperience": "5+"
   },
   "about": {
     "background": "Mechatronics Engineer turned UX Designer, bringing systematic problem-solving and technical depth to user-centered design.",
@@ -273,10 +273,22 @@
   "experience": [
     {
       "id": 1,
+      "title": "Senior UI/UX Designer",
+      "company": "Amnet Digital",
+      "duration": "Jan 2026 – Present",
+      "current": true,
+      "highlights": [
+        "Standardized UI using DSM to ensure consistency across products",
+        "Designed scalable flows driving adoption of AI-assisted workflows",
+        "Partnered with stakeholders to deliver scalable UX solutions"
+      ]
+    },
+     {
+      "id": 2,
       "title": "UI/UX Consultant",
       "company": "Brillio",
-      "duration": "Jun 2025 – Present",
-      "current": true,
+      "duration": "Jun 2025 – Nov 2025",
+      "current": false,
       "highlights": [
         "Redesigned Verizon's iPad ordering app with AI integration",
         "Led user research and AI-driven prototyping",
@@ -284,7 +296,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": 3,
       "title": "UI/UX Designer",
       "company": "Tata Consultancy Services",
       "duration": "Nov 2020 – Jun 2025",
