@@ -1,75 +1,15 @@
 // Centralized Portfolio Data Configuration
 // This file serves as the single source of truth for all portfolio content
 
-// Import Assets
-import Profile_Image from '../assets/profile/Profile_Image.png'; // New Profile Image
-
-import Thumbnail_CBA from '../assets/thumbnails/Thumbnail_CBA.png';
-import Thumbnail_ADCircular from '../assets/thumbnails/Thumbnail_ADCircular.png';
-import Thumbnail_Flexcellence from '../assets/thumbnails/Thumbnail_Flexcellence.png';
-import Thumbnail_AIGovernance from '../assets/thumbnails/Thumbnail_AIGovernance.png';
-import Thumbnail_ADAM from '../assets/thumbnails/Thumbnail_ADAM.png';
-import Thumbnail_JohnCoffeeBeans from '../assets/thumbnails/Thumbnail_JohnCoffeeBeans.png';
-import Thumbnail_VR from '../assets/thumbnails/Thumbnail_VR.png';
+ // New Profile Image
 
 
-// Import Logo Assets
-import Logo_Verizon from '../assets/logos/Logo_Verizon.png';
-import Logo_CBA from '../assets/logos/Logo_CBA.png';
-import Logo_Avery from '../assets/logos/Logo_Avery.png';
-import Logo_TCS from '../assets/logos/Logo_TCS.png';
-import Logo_Brillio from '../assets/logos/Logo_Brillio.png';
-import Logo_Flexcellence from '../assets/logos/Logo_Flexcellence.png';
-import Logo_Stellantis from '../assets/logos/Logo_Stellantis.png';
-import Logo_Aurum from '../assets/logos/Logo_Aurum.png';
 
-// Import profile Assets
-import Anurag from '../assets/profile/Anurag.jpg';
-import AshokKumarNaga from '../assets/profile/Ashok kumar naga.jpg';
-import KarabiBaruah from '../assets/profile/Karabi baruah.jpg';
-import MeenakshiDixit from '../assets/profile/Meenakshi Dixit.jpg';
-import NikeshMangavani from '../assets/profile/Nikesh Mangavani.jpg';
-import PurviGandhi from '../assets/profile/Purvi Gandhi.jpg';
-import RamyaPrakesh from '../assets/profile/Ramya Prakesh.jpg';
-import Senthil from '../assets/profile/Senthil.jpg';
-import VikashMediboina from '../assets/profile/Vikash Mediboina.jpg';
-import YasaswiniDesu from '../assets/profile/Yasaswini desu.jpg';
 
-// Resume File
-import ResumePDF from '../assets/Ajay_Kumar_Resume_Oct25.pdf'; // Now a PDF
 
-// Prevent tree-shaking of assets by creating a dummy reference
-export const getAssetReferences = () => [
-  Profile_Image,
-  Thumbnail_CBA,
-  Thumbnail_ADCircular,
-  Thumbnail_Flexcellence,
-  Thumbnail_AIGovernance,
-  Thumbnail_ADAM,
-  Thumbnail_JohnCoffeeBeans,
-  Thumbnail_VR,
-  
-  ResumePDF,
+ // Now a PDF
 
-  Logo_Verizon,
-  Logo_CBA,
-  Logo_Avery,
-  Logo_TCS,
-  Logo_Brillio,
-  Logo_Flexcellence,
-  Logo_Stellantis,
-  Logo_Aurum,
-  
-  AshokKumarNaga,
-  KarabiBaruah,
-  MeenakshiDixit,
-  NikeshMangavani,
-  PurviGandhi,
-  RamyaPrakesh,
-  Senthil,
-  VikashMediboina,
-  YasaswiniDesu
-];
+
 
 export interface Project {
   id: number;
@@ -234,8 +174,8 @@ export const portfolioData: PortfolioData = {
     portfolio: "https://kannaajaykumar.com",
     linkedin: "https://linkedin.com/in/kanna-ajay-kumar",
     whatsapp: "https://wa.me/919629619859",
-    profileImage: Profile_Image,
-    resumePDF: ResumePDF
+    profileImage: "/images/profile/Profile_Image.png",
+    resumePDF: "/docs/Ajay_Kumar_Resume_Oct25.pdf"
   },
 
   stats: {
@@ -273,7 +213,7 @@ export const portfolioData: PortfolioData = {
         "AI Monitoring",
         "Data Visualization"
       ],
-      image: Thumbnail_ADAM,
+      image: "/images/thumbnails/Thumbnail_ADAM.png",
       category: "Enterprise UX",
       problemStatement: "Streamlining a complex in-store ordering process.",
       externalLink: "https://famous-periodical-d0a.notion.site/ADAM-Control-Tower-UX-Case-Study-2b6eb739e83c80d18133fc7a3057b9b9?pvs=73"
@@ -304,7 +244,7 @@ export const portfolioData: PortfolioData = {
         "Enterprise UX",
         "Web Design"
       ],
-      image: Thumbnail_ADCircular,
+      image: "/images/thumbnails/Thumbnail_ADCircular.png",
       category: "Fintech",
       problemStatement: "Modernizing legacy banking applications.",
       externalLink: "https://famous-periodical-d0a.notion.site/AD-Circular-1dfeb739e83c8035bca1cb5d450033aa"
@@ -339,7 +279,7 @@ export const portfolioData: PortfolioData = {
         "User Testing",
         "MVP Design"
       ],
-      image: Thumbnail_Flexcellence,
+      image: "/images/thumbnails/Thumbnail_Flexcellence.png",
       category: "Web Platform",
       problemStatement: "Connecting businesses for a circular economy.",
       externalLink: "https://famous-periodical-d0a.notion.site/Flexcellence-UX-Case-study-293eb739e83c80118576d2329d3405fa"
@@ -367,7 +307,7 @@ export const portfolioData: PortfolioData = {
         "Enterprise Innovation",
         "3D Experience Design"
       ],
-      image: Thumbnail_VR,
+      image: "/images/thumbnails/Thumbnail_VR.png",
       category: "Mobile App",
       problemStatement: "Boosting user motivation in health tracking.",
       externalLink: "https://famous-periodical-d0a.notion.site/Immersive-Retail-Store-POC-VR-Application-for-the-Metaverse-118eb739e83c808f96d1f367374730d3"
@@ -404,7 +344,7 @@ export const portfolioData: PortfolioData = {
         "Prototyping",
         "User Testing"
       ],
-      image: Thumbnail_JohnCoffeeBeans,
+      image: "/images/thumbnails/Thumbnail_JohnCoffeeBeans.png",
       category: "Enterprise Tool",
       problemStatement: "Ensuring AI compliance with intuitive design.",
       externalLink: "https://medium.com/@ajaykumar.jai1111/john-coffee-beans-6f9d5e81383d"
@@ -438,7 +378,7 @@ export const portfolioData: PortfolioData = {
         "Workflow Design",
         "Interaction Design"
       ],
-      image: Thumbnail_CBA,
+      image: "/images/thumbnails/Thumbnail_CBA.png",
       category: "Emerging Tech",
       problemStatement: "Prototyping the future of retail.",
       externalLink: "https://example.com/vr-case-study"
@@ -472,7 +412,7 @@ export const portfolioData: PortfolioData = {
         "Reporting Systems",
         "Responsible AI"
       ],
-      image: Thumbnail_AIGovernance,
+      image: "/images/thumbnails/Thumbnail_AIGovernance.png",
       category: "Design System",
       problemStatement: "Ensuring consistency at scale.",
       externalLink : "https://example.com/design-system-case-study"
@@ -612,35 +552,35 @@ export const portfolioData: PortfolioData = {
   clients: [
     { 
       name: "Verizon",
-      logo: Logo_Verizon
+      logo: "/images/logos/Logo_Verizon.png"
     },
     { 
       name: "Commonwealth Bank Australia",
-      logo: Logo_CBA
+      logo: "/images/logos/Logo_CBA.png"
     },
     { 
       name: "Avery Dennison",
-      logo: Logo_Avery
+      logo: "/images/logos/Logo_Avery.png"
     },
     { 
       name: "TCS",
-      logo: Logo_TCS
+      logo: "/images/logos/Logo_TCS.png"
     },
     { 
       name: "Brillio",
-      logo: Logo_Brillio
+      logo: "/images/logos/Logo_Brillio.png"
     },
     { 
       name: "Flexellence",
-      logo: Logo_Flexcellence
+      logo: "/images/logos/Logo_Flexcellence.png"
     },
     {
       name: "Stellantis",
-      logo: Logo_Stellantis
+      logo: "/images/logos/Logo_Stellantis.png"
     },
     {
       name: "Aurum",
-      logo: Logo_Aurum
+      logo: "/images/logos/Logo_Aurum.png"
     }
   ],
 
@@ -648,56 +588,56 @@ export const portfolioData: PortfolioData = {
     {
       quote: "Even though we had only a few days of interaction, it was truly great working with Ajay. He had been cooperative, approachable, and always ready to take on any challenge",
       author: "Yasaswini Desu",
-      image: YasaswiniDesu,
+      image: "/images/profile/Yasaswini desu.jpg",
       role: "Lead Developer",
       company: "Brillio"
     },
     {
       quote: "Working with Kanna was a pleasure. He delivered an excellent VBG wireframe on a very tight deadline without compromising quality",
       author: "Nikesh Mangwani",
-      image: NikeshMangavani, 
+      image: "/images/profile/Nikesh Mangavani.jpg", 
       role: "AI Engineer",
       company: "Verizon"
     },
     {
       quote: "It was amazing to see all the screens Kanna built for CT. He understood the business requirements in depth and translated them into clear, structured designs in no time",
       author: "Ramya Prakash",
-      image: RamyaPrakesh,
+      image: "/images/profile/Ramya Prakesh.jpg",
       role: "Business Analyst",
       company: "Brillio"
     },
     {
       quote: "Working with Kanna on the AD Circular project was an absolute pleasure. He quickly understood the business goals, user needs, and technical constraints, and translated everything into clean, user-friendly designs. His ability to simplify complex recycling flows into intuitive screens made a huge difference for our stakeholders. Truly dependable and detail-oriented",
       author: "Karabhi Baruah",
-      image: KarabiBaruah,
+      image: "/images/profile/Karabi baruah.jpg",
       role: "Business Analyst",
       company: "Avery Dennison"
     },
     {
       quote: "Kanna is one of the most proactive designers I've mentored. He brings clarity, strong UX thinking, and a collaborative mindset to every project. Whether it was enterprise workflows, research, or design systems, he always delivered high-quality output on time. His growth in UX has been exceptional, and he brings both creativity and practicality to his work",
       author: "Purvi Gandhi",
-      image: PurviGandhi,
+      image: "/images/profile/Purvi Gandhi.jpg",
       role: "UX Lead",
       company: "TCS"
     },
     {
       quote: "Ajay played a vital role in our CBA migration program. Despite being the sole UX designer, he efficiently handled multiple financial flows, coordinated with BAs, developers, and clients, and ensured a consistent Pega Constellation experience. His communication, ownership, and ability to adapt quickly make him a valuable asset on any delivery team",
       author: "Ashok Kumar Naga",
-      image: AshokKumarNaga,
+      image: "/images/profile/Ashok kumar naga.jpg",
       role: "Delivery Head",
       company: "CBA Projects (TCS)"
     },
     {
       quote: "Ajay kumar's work on the ADAM Control Tower POC exceeded our expectations. He brought structure to an extremely complex AI governance problem and designed a dashboard that both technical and business teams could easily understand. His attention to detail, self-initiative, and strategic thinking stood out throughout the project",
       author: "Senthil Peramanathan",
-      image: Senthil,
+      image: "/images/profile/Senthil.jpg",
       role: "Manager",
       company: "Brillio"
     },
     {
       quote: "Ajay has been instrumental in shaping the UX of our Flexcellence app. He deeply understood our users’ health challenges and transformed them into clean, empathetic, and functional designs. He is highly iterative, listens well, and delivers fast. His work directly contributed to improvements in engagement and conversion during our testing phase",
       author: "Anurag",
-      image: Anurag,
+      image: "/images/profile/Anurag.jpg",
       role: "Founder",
       company: "Flexcellence"
     },

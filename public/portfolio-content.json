@@ -28,8 +28,8 @@
     "portfolio": "https://kannaajaykumar.com",
     "linkedin": "https://linkedin.com/in/kanna-ajay-kumar",
     "whatsapp": "https://wa.me/919629619859",
-    "profileImage": "/src/assets/profile/Profile_Image.png",
-    "resumePDF": "/src/assets/Ajay_Kumar_Resume_Oct25.pdf"
+    "profileImage": "/images/profile/Profile_Image.png",
+    "resumePDF": "/docs/Ajay_Kumar_Resume_Oct25.pdf"
   },
   "stats": {
     "projectsDelivered": "30+",
@@ -65,7 +65,7 @@
         "AI Monitoring",
         "Data Visualization"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_ADAM.png",
+      "image": "/images/thumbnails/Thumbnail_ADAM.png",
       "category": "Enterprise UX",
       "problemStatement": "Streamlining a complex in-store ordering process.",
       "externalLink": "https://famous-periodical-d0a.notion.site/ADAM-Control-Tower-UX-Case-Study-2b6eb739e83c80d18133fc7a3057b9b9?pvs=73"
@@ -96,7 +96,7 @@
         "Enterprise UX",
         "Web Design"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_ADCircular.png",
+      "image": "/images/thumbnails/Thumbnail_ADCircular.png",
       "category": "Fintech",
       "problemStatement": "Modernizing legacy banking applications.",
       "externalLink": "https://famous-periodical-d0a.notion.site/AD-Circular-1dfeb739e83c8035bca1cb5d450033aa"
@@ -131,7 +131,7 @@
         "User Testing",
         "MVP Design"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_Flexcellence.png",
+      "image": "/images/thumbnails/Thumbnail_Flexcellence.png",
       "category": "Web Platform",
       "problemStatement": "Connecting businesses for a circular economy.",
       "externalLink": "https://famous-periodical-d0a.notion.site/Flexcellence-UX-Case-study-293eb739e83c80118576d2329d3405fa"
@@ -159,7 +159,7 @@
         "Enterprise Innovation",
         "3D Experience Design"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_VR.png",
+      "image": "/images/thumbnails/Thumbnail_VR.png",
       "category": "Mobile App",
       "problemStatement": "Boosting user motivation in health tracking.",
       "externalLink": "https://famous-periodical-d0a.notion.site/Immersive-Retail-Store-POC-VR-Application-for-the-Metaverse-118eb739e83c808f96d1f367374730d3"
@@ -196,7 +196,7 @@
         "Prototyping",
         "User Testing"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_JohnCoffeeBeans.png",
+      "image": "/images/thumbnails/Thumbnail_JohnCoffeeBeans.png",
       "category": "Enterprise Tool",
       "problemStatement": "Ensuring AI compliance with intuitive design.",
       "externalLink": "https://medium.com/@ajaykumar.jai1111/john-coffee-beans-6f9d5e81383d"
@@ -230,7 +230,7 @@
         "Workflow Design",
         "Interaction Design"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_CBA.png",
+      "image": "/images/thumbnails/Thumbnail_CBA.png",
       "category": "Emerging Tech",
       "problemStatement": "Prototyping the future of retail.",
       "externalLink": "https://example.com/vr-case-study"
@@ -264,7 +264,7 @@
         "Reporting Systems",
         "Responsible AI"
       ],
-      "image": "/src/assets/thumbnails/Thumbnail_AIGovernance.png",
+      "image": "/images/thumbnails/Thumbnail_AIGovernance.png",
       "category": "Design System",
       "problemStatement": "Ensuring consistency at scale.",
       "externalLink": "https://example.com/design-system-case-study"
@@ -394,91 +394,91 @@
   "clients": [
     {
       "name": "Verizon",
-      "logo": "/src/assets/logos/Logo_Verizon.png"
+      "logo": "/images/logos/Logo_Verizon.png"
     },
     {
       "name": "Commonwealth Bank Australia",
-      "logo": "/src/assets/logos/Logo_CBA.png"
+      "logo": "/images/logos/Logo_CBA.png"
     },
     {
       "name": "Avery Dennison",
-      "logo": "/src/assets/logos/Logo_Avery.png"
+      "logo": "/images/logos/Logo_Avery.png"
     },
     {
       "name": "TCS",
-      "logo": "/src/assets/logos/Logo_TCS.png"
+      "logo": "/images/logos/Logo_TCS.png"
     },
     {
       "name": "Brillio",
-      "logo": "/src/assets/logos/Logo_Brillio.png"
+      "logo": "/images/logos/Logo_Brillio.png"
     },
     {
       "name": "Flexellence",
-      "logo": "/src/assets/logos/Logo_Flexcellence.png"
+      "logo": "/images/logos/Logo_Flexcellence.png"
     },
     {
       "name": "Stellantis",
-      "logo": "/src/assets/logos/Logo_Stellantis.png"
+      "logo": "/images/logos/Logo_Stellantis.png"
     },
     {
       "name": "Aurum",
-      "logo": "/src/assets/logos/Logo_Aurum.png"
+      "logo": "/images/logos/Logo_Aurum.png"
     }
   ],
   "testimonials": [
     {
       "quote": "Even though we had only a few days of interaction, it was truly great working with Ajay. He had been cooperative, approachable, and always ready to take on any challenge",
       "author": "Yasaswini Desu",
-      "image": "/src/assets/profile/Yasaswini%20desu.jpg",
+      "image": "/images/profile/Yasaswini%20desu.jpg",
       "role": "Lead Developer",
       "company": "Brillio"
     },
     {
       "quote": "Working with Kanna was a pleasure. He delivered an excellent VBG wireframe on a very tight deadline without compromising quality",
       "author": "Nikesh Mangwani",
-      "image": "/src/assets/profile/Nikesh%20Mangavani.jpg",
+      "image": "/images/profile/Nikesh%20Mangavani.jpg",
       "role": "AI Engineer",
       "company": "Verizon"
     },
     {
       "quote": "It was amazing to see all the screens Kanna built for CT. He understood the business requirements in depth and translated them into clear, structured designs in no time",
       "author": "Ramya Prakash",
-      "image": "/src/assets/profile/Ramya%20Prakesh.jpg",
+      "image": "/images/profile/Ramya%20Prakesh.jpg",
       "role": "Business Analyst",
       "company": "Brillio"
     },
     {
       "quote": "Working with Kanna on the AD Circular project was an absolute pleasure. He quickly understood the business goals, user needs, and technical constraints, and translated everything into clean, user-friendly designs. His ability to simplify complex recycling flows into intuitive screens made a huge difference for our stakeholders. Truly dependable and detail-oriented",
       "author": "Karabhi Baruah",
-      "image": "/src/assets/profile/Karabi%20baruah.jpg",
+      "image": "/images/profile/Karabi%20baruah.jpg",
       "role": "Business Analyst",
       "company": "Avery Dennison"
     },
     {
       "quote": "Kanna is one of the most proactive designers I've mentored. He brings clarity, strong UX thinking, and a collaborative mindset to every project. Whether it was enterprise workflows, research, or design systems, he always delivered high-quality output on time. His growth in UX has been exceptional, and he brings both creativity and practicality to his work",
       "author": "Purvi Gandhi",
-      "image": "/src/assets/profile/Purvi%20Gandhi.jpg",
+      "image": "/images/profile/Purvi%20Gandhi.jpg",
       "role": "UX Lead",
       "company": "TCS"
     },
     {
       "quote": "Ajay played a vital role in our CBA migration program. Despite being the sole UX designer, he efficiently handled multiple financial flows, coordinated with BAs, developers, and clients, and ensured a consistent Pega Constellation experience. His communication, ownership, and ability to adapt quickly make him a valuable asset on any delivery team",
       "author": "Ashok Kumar Naga",
-      "image": "/src/assets/profile/Ashok%20kumar%20naga.jpg",
+      "image": "/images/profile/Ashok%20kumar%20naga.jpg",
       "role": "Delivery Head",
       "company": "CBA Projects (TCS)"
     },
     {
       "quote": "Ajay kumar's work on the ADAM Control Tower POC exceeded our expectations. He brought structure to an extremely complex AI governance problem and designed a dashboard that both technical and business teams could easily understand. His attention to detail, self-initiative, and strategic thinking stood out throughout the project",
       "author": "Senthil Peramanathan",
-      "image": "/src/assets/profile/Senthil.jpg",
+      "image": "/images/profile/Senthil.jpg",
       "role": "Manager",
       "company": "Brillio"
     },
     {
       "quote": "Ajay has been instrumental in shaping the UX of our Flexcellence app. He deeply understood our users’ health challenges and transformed them into clean, empathetic, and functional designs. He is highly iterative, listens well, and delivers fast. His work directly contributed to improvements in engagement and conversion during our testing phase",
       "author": "Anurag",
-      "image": "/src/assets/profile/Anurag.jpg",
+      "image": "/images/profile/Anurag.jpg",
       "role": "Founder",
       "company": "Flexcellence"
     },
