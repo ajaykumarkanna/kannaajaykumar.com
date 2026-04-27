@@ -2,7 +2,6 @@ backend:
   name: github
   repo: ajaykumarkanna/kannaajaykumar.com
   branch: main
-  app_id: Ov23liFsY9l1ZhsDHynA
 
 media_folder: "public/images"
 public_folder: "/images"
